@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask App new🚀</title>
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Keyframes for the glowing text animation */
+        @keyframes text-glow {
+            from {
+                text-shadow: 0 0 8px rgba(255, 152, 0, 0.6), 0 0 16px rgba(255, 152, 0, 0.6);
+            }
+
+            to {
+                text-shadow: 0 0 16px rgba(255, 152, 0, 0.8), 0 0 24px rgba(255, 152, 0, 0.8);
+            }
+        }
+
+        /* Reset Default Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with a bolder, more dynamic gradient */
+        body {
+            background: linear-gradient(135deg, #2c3e50, #000000);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Glassmorphic Container */
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Elegant Heading with Animation */
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffaf40, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: text-glow 1.5s ease-in-out infinite alternate;
+        }
+
+        /* Messages Box */
+        .messages {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .messages p {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+
+        .messages p.error {
+            background: rgba(255, 82, 82, 0.2);
+            color: #ffc1c1;
+            font-weight: 600;
+        }
+
+        /* Flex container for the form */
+        .form-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Animated Input Fields */
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #ff9800;
+            box-shadow: 0 0 12px rgba(255, 152, 0, 0.5);
+            outline: none;
+        }
+
+        /* Glowing Submit Button with Icon */
+        .submit-button {
+            flex-shrink: 0;
+            width: 50px;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff9800, #e65100);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .submit-button:hover {
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Hide the text on the submit button by default */
+        .submit-button .text {
+            display: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            /* Change form to vertical layout on small screens */
+            .form-container {
+                flex-direction: column;
+            }
+
+            .submit-button {
+                width: 100%;
+                /* Make button full width */
+            }
+
+            /* Hide the icon and show the text on small screens */
+            .submit-button .icon {
+                display: none;
+            }
+
+            .submit-button .text {
+                display: inline;
+            }
+
+            input[type="text"],
+            .submit-button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Rajat's DevOps Project</h1>
+        <div class="messages">
+            <!-- This part is populated by the Flask backend on initial page load -->
+            {% for message in messages %}
+            <p>{{ message[0] }}</p>
+            {% endfor %}
+        </div>
+
+        <form id="messageForm">
+            <div class="form-container">
+                <input type="text" name="new_message" placeholder="Type your message..." required>
+                <button type="submit" class="submit-button">
+                    <!-- SVG Send Icon for large screens -->
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    <!-- Text for small screens -->
+                    <span class="text">Submit</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- jQuery for Smooth AJAX Requests -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#messageForm").on("submit", function (event) {
+                event.preventDefault(); // Prevent page reload
+
+                let messageInput = $("input[name='new_message']");
+                let message = messageInput.val().trim();
+
+                if (message === "") {
+                    return;
+                }
+
+                $.ajax({
+                    url: "/submit",
+                    type: "POST",
+                    data: { new_message: message },
+                    success: function (response) {
+                        if (response && response.message) {
+                            $(".messages").append("<p>" + response.message + "</p>");
+                            messageInput.val("");
+                        } else {
+                            $(".messages").append("<p class='error'>Error: Invalid response from server.</p>");
+                        }
+                        $('.messages').scrollTop($('.messages')[0].scrollHeight);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error:", status, error);
+                        $(".messages").append("<p class='error'>Could not send message. Server may be down.</p>");
+                        $('.messages').scrollTop($('.messages')[0].scrollHeight);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
