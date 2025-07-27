@@ -3,7 +3,6 @@ pipeline {
 
     stages {
         stage('Clone Repo') {
-            echo 'Hello from Github Repo :)'
             steps {
                 git url: 'https://github.com/rajatevencodes/DevOps-2-Tier-App.git', branch: 'main'
             }
