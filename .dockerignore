@@ -3,6 +3,7 @@
 Dockerfile
 docker-compose.yaml
 .dockerignore
+kubernetes/
 
 # Git-related files
 # Your Git history and configuration should not be part of the image.
