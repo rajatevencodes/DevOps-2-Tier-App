@@ -21,13 +21,13 @@ services:
   flask-app:
     # If the image is not available and 'build' option is not there
     # docker pull the image from Docker Hub
-    # image: rajatcantcode/2-tier-flask-app-img:latest
+    image: rajatcantcode/2-tier-flask-app-img:latest
 
     # If you want to build the image from the Dockerfile in the current directory
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: 2-tier-flask-app-img
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    # image: 2-tier-flask-app-img
     container_name: 2-tier-flask-app
     ports:
       - "5001:5001"
@@ -37,7 +37,8 @@ services:
       MYSQL_PASSWORD: root
       MYSQL_DB: rajat
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - rajatKaNetwork
     restart: always
